@@ -59,7 +59,7 @@ public class RealmCore {
     public static boolean osIsWindows()
     {
         String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
-        return (os.indexOf("win") >= 0);
+        return (os.contains("win"));
     }
 
     public static byte[] serialize(Serializable value) {
@@ -141,8 +141,8 @@ public class RealmCore {
             else {
                 jnilib = "realm-jni-dbg";
             }
-            System.loadLibrary(jnilib);
         }
+        System.loadLibrary(jnilib);
         libraryIsLoaded.set(true);
 
         Version.coreLibVersionCompatible(true);

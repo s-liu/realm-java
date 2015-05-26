@@ -68,53 +68,6 @@ public class Mixed {
         this.value = value;
     }
 
-    public boolean equals(Object second) {
-        if (second == null)
-            return false;
-        if (!(second instanceof Mixed))
-            return false;
-        Mixed secondMixed = (Mixed) second;
-        if (value == null) {
-            if (secondMixed.value == null) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        if (!getType().equals(secondMixed.getType())) {
-            return false;
-        }
-        if (value instanceof byte[]) {
-            if (!(secondMixed.value instanceof byte[])) {
-                return false;
-            }
-            byte[] firstBytes = (byte[]) value;
-            byte[] secondBytes = (byte[]) secondMixed.value;
-            if (firstBytes.length != secondBytes.length) {
-                return false;
-            }
-            for (int i = 0; i < firstBytes.length; i++) {
-                if (firstBytes[i] != secondBytes[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        if (value instanceof ByteBuffer) {
-            ByteBuffer firstByteBuffer = (ByteBuffer) value;
-            ByteBuffer secondByteBuffer = (ByteBuffer) secondMixed.value;
-            if (firstByteBuffer.capacity() != secondByteBuffer.capacity()) {
-                return false;
-            }
-            for (int i = 0; i < firstByteBuffer.capacity(); i++) {
-                if (firstByteBuffer.get(i) != secondByteBuffer.get(i))
-                    return false;
-            }
-            return true;
-        }
-        return this.value.equals(secondMixed.value);
-    }
-
     public ColumnType getType() {
         if (value == null) {
             return ColumnType.TABLE;
